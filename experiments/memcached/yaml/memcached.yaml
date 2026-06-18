@@ -27,6 +27,7 @@ spec:
         image: memcached:1.6-alpine
         ports:
         - containerPort: 11211
+        args: ["-t", "20"]
 ---
 apiVersion: v1
 kind: Service
