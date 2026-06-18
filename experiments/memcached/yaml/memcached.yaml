@@ -25,6 +25,13 @@ spec:
       containers:
       - name: memcached
         image: memcached:1.6-alpine
+        resources:
+          requests:
+            cpu: "8"
+            memory: "32Gi"
+          limits:
+            cpu: "8"
+            memory: "32Gi"
         ports:
         - containerPort: 11211
         args: [
