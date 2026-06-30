@@ -10,7 +10,10 @@ fi
 for ((i=1; i<=NODE_COUNT; i++)); do
     NODE=10.10.1.$i
 
-    ssh -o StrictHostKeyChecking=no $NODE "sudo /local/repository/scripts/disable_hyperthreading.sh"
+    if ! ssh -o StrictHostKeyChecking=no $NODE "sudo /local/repository/scripts/disable_hyperthreading.sh"; then
+        echo "Failed to SSH into $NODE, skipping..."
+        continue
+    fi
     ssh -o StrictHostKeyChecking=no $NODE "sudo /local/repository/scripts/disable_turboboost.sh"
     ssh -o StrictHostKeyChecking=no $NODE "sudo /local/repository/scripts/set_all_cores_policy.sh performance"
 done
